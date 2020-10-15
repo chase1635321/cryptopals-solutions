@@ -15,5 +15,16 @@ def hamming_distance(a, b):
 assert(hamming_distance(s1, s2) == 37)
 
 
+ciphertext = ""
+with open("file.txt", "rb") as f:
+    ciphertext = f.read()
+
+
+possible_keys = []
 for KEYSIZE in range(2, 40):
+    possible_keys.append((KEYSIZE, hamming_distance(ciphertext[0:KEYSIZE], ciphertext[KEYSIZE:KEYSIZE*2])/KEYSIZE))
+
+for KEYSIZE, distance in possible_keys:
+    print("Possible keysize " + str(KEYSIZE) + " of distance " + str(distance))
+
 
